@@ -95,3 +95,74 @@ command.line.prop=${command.line.prop}
   ...
 </settings>
 ```
+
+## pom
+### pom中父级pom的默认路径
+<parent>标签中，如果父级pom.xml在当前项目的上一级目录下面，则不用写<relativePath>否则需要手动指定
+
+## profile
+在settings中指定激活的profile
+```
+<settings>
+  ...
+  <activeProfiles>
+    <activeProfile>dev</activeProfile>
+  </activeProfiles>
+  ...
+</settings>
+```
+
+## 默认激活的profile查看  参考 https://maven.apache.org/guides/introduction/introduction-to-profiles.html
+### 用如下命令查看
+```
+mvn help:active-profiles
+```
+### 配置文件和命令行同时都有激活profile，查看时候用
+```
+mvn help:active-profiles -P appserverConfig-dev
+```
+
+这个时候可能列出来的事两个如下:
+```
+The following profiles are active:
+
+ - appserverConfig-dev (source: pom)
+ - appserverConfig (source: settings.xml)
+```
+即使列出来激活的是两个，想看哪个真正被应用，用如下命令
+```
+mvn help:effective-pom -P appserverConfig-dev
+```
+注意settings.xml中的优先级高于POM中的，所以被应用的是appserverConfig
+
+
+
+## 可选依赖项
+比如Mybatis可以操作数据库，Mysql,PostgreSQL，Oracle等等，但是程序只使用一种数据库，所以mybatis这个项目可以将各个数据库的驱动声明为可选依赖项。这样，ProjectA依赖Mybatis的时候，只需要把特定数据库的依赖项明确依赖就行，没必要依赖别的数据库驱动。
+
+## 依赖排除 (排除项适用于声明他们的位置下方的整个依赖项链条)
+A --> B --> D --> E
+现在A项目要用到B也要用到D，但是不需要用E，则可以引入B的时候，声明排除E（中间跳过了D）
+```
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>sample.ProjectA</groupId>
+  <artifactId>Project-A</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  ...
+  <dependencies>
+    <dependency>
+      <groupId>sample.ProjectB</groupId>
+      <artifactId>Project-B</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <exclusions>
+        <exclusion>
+          <groupId>sample.ProjectE</groupId> <!-- Exclude Project-E from Project-B -->
+          <artifactId>Project-E</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+  </dependencies>
+</project>
+```

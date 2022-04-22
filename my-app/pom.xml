@@ -29,6 +29,7 @@
     </dependency>
   </dependencies>
 
+
   <build>
     <resources>
       <resource>
@@ -79,6 +80,6 @@
         </plugin>
       </plugins>
     </pluginManagement>
-
+    <finalName>my-app.jar</finalName>
   </build>
 </project>

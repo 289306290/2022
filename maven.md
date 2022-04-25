@@ -166,3 +166,102 @@ A --> B --> D --> E
   </dependencies>
 </project>
 ```
+
+## 远程仓库，一般替换为国内的镜像，设置在settings.xml中
+
+```
+<settings>
+  ...
+  <mirrors>
+    <mirror>
+      <id>other-mirror</id>
+      <name>Other Mirror Repository</name>
+      <url>https://other-mirror.repo.other-company.com/maven2</url>
+      <mirrorOf>central</mirrorOf>
+    </mirror>
+  </mirrors>
+  ...
+</settings>
+```
+例如:用阿里云替换central
+
+```
+<mirror>
+       <id>nexus-aliyun</id>
+       <mirrorOf>central</mirrorOf>
+       <name>Nexus aliyun</name>
+       <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+</mirror>
+```
+### 也可以在项目pom中配置，并且项目优先级较高(先用项目pom中配置的仓库去找，找不到才用settings.xml中配置的仓库）
+```
+<project>
+...
+  <repositories>
+    <repository>
+      <id>my-repo1</id>
+      <name>your custom repo</name>
+      <url>http://jarsm2.dyndns.dk</url>
+    </repository>
+    <repository>
+      <id>my-repo2</id>
+      <name>your custom repo</name>
+      <url>http://jarsm2.dyndns.dk</url>
+    </repository>
+  </repositories>
+...
+</project>
+```
+### 查看起作用的maven setting 配置可以用如下命令 (mvn主目录conf下面的配置以及~/.m2/settings.xml中合并的配置)
+ `mvn help:effective-settings` 
+ 
+### 查看生效的pom （这里好像不包含镜像仓库）
+`mvn help:effective-pom -Dverbose`
+
+### 一般配置
+## 在用户settings.xml中配置阿里镜像仓库，另外配置一个profile,让其默认为激活状态(这里配置公司的maven私服地址）
+```
+<profile>
+ 	<id>thirdparty</id>
+  <repositories>
+        <repository>
+            <id>thirdparty</id>
+            <url>http://xxx.bbb.com/nexus/content/repositories/thirdparty</url>
+        </repository>
+		<repository>
+			<id>puhuifinance</id>
+			<name>Maven of Puhuifinance.com</name>
+			<url>http://xxx.bbb.com/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+			<layout>default</layout>
+		</repository>
+		<repository>
+			<id>oschina</id>
+			<name>Maven of oschina.net</name>
+			<url>http://maven.oschina.net/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+ </profile>
+ 
+</profiles>
+
+<activeProfiles>
+    <activeProfile>thirdparty</activeProfile>
+  </activeProfiles>
+```

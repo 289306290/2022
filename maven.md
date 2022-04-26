@@ -1,33 +1,35 @@
 ## 官网   https://maven.apache.org/
 
 配置环境变量
-export PATH=/opt/apache-maven-3.8.5/bin:$PATH
+`export PATH=/opt/apache-maven-3.8.5/bin:$PATH`
 
 ## 简单向导  https://maven.apache.org/guides/getting-started/index.html
 
 
 
 
+```
 mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+```
 
 
 ###  java 9 or later 需要使用的maven-compiler-plugin需要最少为3.6.0，并且设置maven.compiler.release为对应的java版本,例如:
 ```
-	<properties>
-        <maven.compiler.release>11</maven.compiler.release>
-    </properties>
+<properties>
+    <maven.compiler.release>11</maven.compiler.release>
+</properties>
  
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.1</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
+<build>
+    <pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+            </plugin>
+        </plugins>
+    </pluginManagement>
+</build>
 ```
 
 ### 资源过滤
@@ -221,9 +223,10 @@ A --> B --> D --> E
 ### 一般配置
 ## 在用户settings.xml中配置阿里镜像仓库，另外配置一个profile,让其默认为激活状态(这里配置公司的maven私服地址）
 ```
-<profile>
- 	<id>thirdparty</id>
-  <repositories>
+</profiles>
+	<profile>
+	 	<id>thirdparty</id>
+	  <repositories>
         <repository>
             <id>thirdparty</id>
             <url>http://xxx.bbb.com/nexus/content/repositories/thirdparty</url>
@@ -262,6 +265,6 @@ A --> B --> D --> E
 </profiles>
 
 <activeProfiles>
-    <activeProfile>thirdparty</activeProfile>
-  </activeProfiles>
+  <activeProfile>thirdparty</activeProfile>
+</activeProfiles>
 ```

@@ -268,3 +268,180 @@ A --> B --> D --> E
   <activeProfile>thirdparty</activeProfile>
 </activeProfiles>
 ```
+
+## 如果要临时离线构建，可以使用 -o
+` mvn -o package`
+
+## 完整的pom.xml元素以及解释如下: 
+https://maven.apache.org/ref/3.8.5/maven-model/maven.html#class_extension
+
+## 依赖机制参考
+https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#introduction-to-the-dependency-mechanism
+
+## 上传jar包到私服相关   https://maven.apache.org/guides/mini/guide-large-scale-centralized-deployments.html
+注意maven deploy plugin版本
+```
+<settings>
+  ...
+  <profiles>
+    <profile>
+ 
+      <id>corp-repository-manager</id>
+ 
+      <properties>
+        <!--
+          For Maven Deploy Plugin >= 2.8, deploy snapshots to this repository instead of the
+          distributionManagement snapshotRepository from project pom.xml files.
+        -->
+        <altSnapshotDeploymentRepository>corp::default::https://corp-repository-manager-host/maven-snapshots</altSnapshotDeploymentRepository>
+ 
+        <!--
+          For Maven Deploy Plugin >= 2.8, deploy releases to this repository instead of the
+          distributionManagement repository from project pom.xml files.
+        -->
+        <altReleaseDeploymentRepository>corp::default::https://corp-repository-manager-host/maven-releases</altReleaseDeploymentRepository>
+ 
+        <!--
+          Only needed if some projects are still using Maven Deploy Plugin >=2.3 and < 2.8,
+          which is the case if projects are using the default version of Maven Deploy Plugin in maven 3.x.
+          For Maven Deploy Plugin >=2.3 and < 2.8, deploy both releases and snapshots to this repository
+          instead of the repositories mentioned in distributionManagement from project pom.xml files.
+        -->
+        <altDeploymentRepository>corp::default::https://corp-repository-manager-host/maven-combined</altDeploymentRepository>
+      </properties>
+ 
+      <repositories>
+        <repository>
+          <id>corp</id>
+          <!--
+            This URL is overridden by the corp-repository-manager mirror above.
+            Some misbehaving tools might complain if they can't resolve the host specified here.
+            If you encounter this problem, use the same URL as the corp-repository-manager mirror.
+          -->
+          <url>https://ignored</url>
+          <releases>
+            <enabled>true</enabled>
+            <updatePolicy>never</updatePolicy>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+          </snapshots>
+        </repository>
+      </repositories>
+ 
+      <pluginRepositories>
+        <pluginRepository>
+          <id>corp</id>
+          <!--
+            This URL is overridden by the corp-repository-manager mirror above.
+            Some misbehaving tools might complain if they can't resolve the host specified here.
+            If you encounter this problem, use the same URL as the corp-repository-manager mirror.
+          -->
+          <url>https://ignored</url>
+          <releases>
+            <enabled>true</enabled>
+            <updatePolicy>never</updatePolicy>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+          </snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+ 
+    </profile>
+  </profiles>
+  <activeProfiles>
+    <activeProfile>corp-repository-manager</activeProfile>
+  </activeProfiles>
+  ...
+</settings>
+```
+
+## maven-assembly-plugin 自定义打包
+配置文档 https://maven.apache.org/plugins/maven-assembly-plugin/assembly.html
+预定义的示例  https://maven.apache.org/plugins/maven-assembly-plugin/descriptor-refs.html#bin
+1. 首先pom中配置此插件
+```
+<build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+          <descriptors>
+            <descriptor>src/assembly/dep.xml</descriptor>
+          </descriptors>
+        </configuration>
+        <executions>
+          <execution>
+            <id>create-archive</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+```
+2. 示例dep.xml
+```
+<assembly>
+    <id>assembly</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>lib</outputDirectory>
+            <unpack>false</unpack>
+        </dependencySet>
+    </dependencySets>
+    <fileSets>
+        <fileSet>
+            <directory>${project.basedir}/src/main/resources</directory>
+            <outputDirectory>/conf</outputDirectory>
+
+            <includes>
+                <include>**/*</include>
+            </includes>
+            <fileMode>0644</fileMode>
+            <filtered>true</filtered>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src/main/assembly</directory>
+            <outputDirectory>/bin</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>0755</fileMode>
+            <includes>
+                <include>*.sh</include>
+            </includes>
+            <lineEnding>unix</lineEnding>
+        </fileSet>
+    </fileSets>
+</assembly>
+```
+## settings.xml配置文档 
+https://maven.apache.org/ref/3.8.5/maven-settings/settings.html
+
+## maven环境变量
+### 下载构建的时候,maven默认允许同时下载5个插件，可以命令行调整 `-Dmaven.artifact.threads`
+例如：
+`mvn -Dmaven.artifact.threads=1 verify`
+
+如果想永久设置需要配置MAVEN_OPTS  
+`export MAVEN_OPTS=-Dmaven.artifact.threads=3`
+
+
+### mvn 命令参数，主要多模块项目时候 参考https://maven.apache.org/guides/mini/guide-multiple-modules-4.html
+```
+1. -pl 相当于 --projects 指定打包某个项目
+mvn clean package -pl puhui-cc-cloud-server -Dmaven.test.skip=true
+2. -am 相当于 --also-make  表示同时处理选定模块所依赖的模块
+mvn clean package -am puhui-cc-cloud-server -Dmaven.test.skip=true  打包puhui-cc-cloud-server同时打包依赖的puhui-cc-common
+3. --amd  相当于 --also-make-dependents  表示同时处理依赖选定模块的模块
+mvn clean package -am puhui-cc-common -Dmaven.test.skip=true  打包puhui-cc-common同时打包依赖于这个的puhui-cc-cloud-server
+```

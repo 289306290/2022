@@ -443,5 +443,5 @@ mvn clean package -pl puhui-cc-cloud-server -Dmaven.test.skip=true
 2. -am 相当于 --also-make  表示同时处理选定模块所依赖的模块
 mvn clean package -am puhui-cc-cloud-server -Dmaven.test.skip=true  打包puhui-cc-cloud-server同时打包依赖的puhui-cc-common
 3. --amd  相当于 --also-make-dependents  表示同时处理依赖选定模块的模块
-mvn clean package -am puhui-cc-common -Dmaven.test.skip=true  打包puhui-cc-common同时打包依赖于这个的puhui-cc-cloud-server
+mvn clean package -amd puhui-cc-common -Dmaven.test.skip=true  打包puhui-cc-common同时打包依赖于这个的puhui-cc-cloud-server
 ```

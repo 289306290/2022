@@ -1,10 +1,13 @@
 package com.springbase.vo;
 
+import org.springframework.beans.factory.annotation.Value;
+
 public class PersonVo {
 
     public PersonVo(){
         System.out.println("构造方法PersonVo");
     }
+    @Value("${person.name}")
     private String name;
     private int age;
 

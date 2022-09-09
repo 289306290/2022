@@ -2,6 +2,7 @@ package com.springbase;
 
 import com.springbase.config.MainConfig;
 import com.springbase.context.SpringContextHolder;
+import com.springbase.vo.Animal;
 import com.springbase.vo.Student;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -16,7 +17,11 @@ public class Application {
 
         Student student = SpringContextHolder.getBean("student");
         System.out.println("stu--   "+student);
+        System.out.println("stu--age   "+student.getAge());
 
 
+        Animal animal =  SpringContextHolder.getBean("animal");
+        System.out.println("animal的名字是屬性注入的另一種方式实现的" + animal.getName());
+        configApplicationContext.close();
     }
 }

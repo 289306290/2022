@@ -1,17 +1,17 @@
 package com.springbase;
 
 import com.springbase.config.MainConfig;
+import com.springbase.config.MyAnnotationConfigApplicationContext;
 import com.springbase.context.SpringContextHolder;
 import com.springbase.vo.Animal;
 import com.springbase.vo.Student;
 import org.springframework.context.ApplicationEvent;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Arrays;
 
-public class Application {
+public class MyApplication {
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext configApplicationContext = new AnnotationConfigApplicationContext(MainConfig.class);
+        MyAnnotationConfigApplicationContext configApplicationContext = new MyAnnotationConfigApplicationContext(MainConfig.class);
 //        System.out.println(configApplicationContext.getBean("personVo"));
         String[] beanNames = configApplicationContext.getBeanDefinitionNames();
         Arrays.stream(beanNames).forEach(name -> System.out.println(configApplicationContext.getBean(name)));

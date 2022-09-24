@@ -21,8 +21,11 @@ public class Test {
             new People("lili",8),
             new People("lucy",2));
 
-    public static void main1(String[] args) {
-        testComputeIfAbsent();
+    public static void main(String[] args) {
+//        testComputeIfAbsent();
+
+        System.out.println(16 & 32);
+//        Unsafe.getUnsafe();//会报错 不能直接这么用,需要用到反射来使用这个Unsafe
     }
 
     private static  void testComputeIfAbsent(){
@@ -91,7 +94,7 @@ public class Test {
         thread1.start();
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main4(String[] args) throws InterruptedException {
         Thread thread2;
         Thread thread1;
         thread1= new Thread(() -> {

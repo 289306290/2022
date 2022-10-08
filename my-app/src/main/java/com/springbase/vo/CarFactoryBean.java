@@ -9,6 +9,7 @@ public class CarFactoryBean implements FactoryBean<Car>{
     @Nullable
     @Override
     public Car getObject() throws Exception {
+        System.out.println("=========CarFactoryBean=====================");
         return new Car();
     }
 

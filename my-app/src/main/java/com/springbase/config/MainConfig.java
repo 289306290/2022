@@ -47,9 +47,21 @@ public class MainConfig {
     @Bean
     /**
      * 当 -DSpring.profiles.active=dev时候生效
+     * -DSpring.profiles.active=dev,beta 时候 dev 和 beta都生效
      */
     @Profile("dev")
     public ProfileBean devBean(){
+        System.out.println("这里是spring.profiles.active=dev");
+        return new ProfileBean();
+    }
+
+    @Bean
+    /**
+     * 当 -DSpring.profiles.active=dev时候生效
+     */
+    @Profile("beta")
+    public ProfileBean betaBean(){
+        System.out.println("这里是spring.profiles.active=beta");
         return new ProfileBean();
     }
 }

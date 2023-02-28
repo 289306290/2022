@@ -13,6 +13,7 @@ public class ArrUtils {
 
     public static void printf(int[] arr) {
         Arrays.stream(arr).forEach(e->{System.out.print(e+",");});
+        System.out.println();
     }
 
     public static void main(String[] args) {

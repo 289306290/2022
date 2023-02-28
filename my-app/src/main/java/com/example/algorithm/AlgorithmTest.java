@@ -9,9 +9,12 @@ import java.util.Arrays;
 public class AlgorithmTest {
     public static void main(String[] args) {
 
+//        printArr(selectSort(new int[]{51,32,6,7,5,33,9}));
+        printArr(bubbleSort(new int[]{51,32,6,7,5,33,9}));
+        printArr(bubbleSort2(new int[]{51,32,6,7,5,33,9}));
 //        System.out.println(biSearch(new int[]{1,3,4,5,9}, 9));
 
-//        printArr(bubbleSort(new int[]{51,32,6,7,5,33,9}));
+
 //        printArr(insertSort(new int[]{51,32,6,7,5,33,9}));
 
 //        printArr(quickSort(new int[]{51,32,6,7,5,33,9}, 0, 6));
@@ -20,8 +23,36 @@ public class AlgorithmTest {
 //        printArr(shellSort(new int[]{33,7,92,8,2,66,21}));
 
 
-        printArr(mergeSort(new int[]{33,7,92,8,2,66,21}));
+//        printArr(mergeSort(new int[]{33,7,92,8,2,66,21}));
 
+    }
+
+    public static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+    public static void swap2(int[] arr, int i, int j) {
+        //这么写的前提是数组中 i!=j 否则会把i和j位置的数都改为0
+        arr[i] = arr[i] ^ arr[j];
+        arr[j] = arr[i] ^ arr[j];
+        arr[i] = arr[i] ^ arr[j];
+    }
+
+    public static int[] selectSort(int[] arr) {
+        if (arr.length < 2) {
+            return arr;
+        }
+        for (int i = 0; i < arr.length - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < arr.length ; j++) {
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j;
+                }
+            }
+            swap(arr, i, minIndex);
+        }
+        return arr;
     }
 
 
@@ -58,6 +89,17 @@ public class AlgorithmTest {
         System.out.println("");
     }
 
+
+    public static int[] bubbleSort2(int[] arr) {
+        for (int i = arr.length - 1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    swap(arr,j,j+1);
+                }
+            }
+        }
+        return arr;
+    }
 
     /**
      * 冒泡排序
@@ -141,10 +183,9 @@ public class AlgorithmTest {
             while (start < end && arr[end] > baseVal) {
                 end--;
             }
-            if (arr[end] < baseVal) {
-                int temp = arr[end];
-                arr[end] = arr[start];
-                arr[start] = temp;
+            if (start < end) {
+                arr[start] = arr[end];
+                start++;
             }
 
             //从前往后比较,直到找到比基准值大的值
@@ -152,16 +193,16 @@ public class AlgorithmTest {
                 start++;
             }
 
-            if (arr[start] > baseVal) {
-                int temp = arr[start];
-                arr[start] = arr[end];
-                arr[end] = temp;
+            if (start < end) {
+                arr[end] = arr[start];
+                end--;
 
             }
 
         }
+        arr[start] = baseVal;
         //此时基准值左边的都比基准值小，基准值右边的都比基准值大， 然后进行下面的递归调用
-        if (low > start) {
+        if (low < start) {
             quickSort(arr, low, start - 1);
         }
         if (end < hign) {

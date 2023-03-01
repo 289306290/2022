@@ -28,6 +28,13 @@ public class MergeSort {
         merge(arr, l, mid, r);
     }
 
+    /**
+     * 数组arr中,从l到mid有序;  从mid到r有序. 然后将这两段合并成排好序的arr
+     * @param arr
+     * @param l
+     * @param mid
+     * @param r
+     */
     public static void merge(int[] arr, int l, int mid, int r) {
         int[] help = new int[r - l + 1];
         int p1=l, p2 = mid +1, i =0;

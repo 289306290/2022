@@ -19,7 +19,8 @@ public class ReverseSingleLinkList {
         node6.setNext(node7);
 
 
-        Node result = reverse(node1);
+//        Node result = reverse(node1);
+        Node result = reverseRecursion(node1);
         while (null != result) {
             System.out.println(result.getValue());
             result = result.getNext();
@@ -46,5 +47,22 @@ public class ReverseSingleLinkList {
 
         }
         return head;
+    }
+
+
+    /**
+     * 递归方式翻转单链表
+     * @param head
+     * @return
+     */
+    public static Node reverseRecursion(Node head) {
+        if (null == head || head.getNext() == null) {
+            return head;
+        }
+        Node curr = head.getNext();
+        Node newNode = reverseRecursion(curr);
+        curr.setNext(head);
+        head.setNext(null);
+        return newNode;
     }
 }

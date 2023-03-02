@@ -4,6 +4,7 @@ import com.example.algorithm.zuochengyun.sort.ArrUtils;
 import com.example.algorithm.zuochengyun.sort.DuiShuQi;
 
 /**
+ * 这个里面是大根堆
  * 堆排序
  * 完全二叉树就是满二叉树可以从最后的节点连续往前少几个,但是所有节点都是连续的。
  * 堆结构就是用数组实现的完全二叉树结构
@@ -21,6 +22,7 @@ public class HeapSort {
         ArrUtils.printf(arr);
     }
 
+    //大根堆
     public static void heapSort(int[] arr) {
         if (null == arr || arr.length < 2) {
             return;

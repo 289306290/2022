@@ -1,0 +1,18 @@
+{
+  "header": {
+    "app_id": "12345678",
+    "res_id":"1574281762827489280",
+    "uid": "123"
+  },
+  "parameter": {
+    "vmr": {
+      "scene_id": "test_scene_id",
+      "avatar_id": "118801001",
+      "width": 1920,
+      "height": 1080,
+      "stream":{
+        "protocol":"rtmp"
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "header": {
+    "app_id": "12345678",
+    "uid": "u123",
+    "session": "xdF7sUElilEdfmAlfGFHu8h5EmHlgQvdfmgcfmnKfmWKgmHdh4RbhdE3Eqh0sGEMEpX4sQAbgVWbgVBnICk6gQz5gQz4rTIbiQI7gpE7gmvdEq5="
+  },
+  "parameter": {
+    "tts": {
+      "vcn": "x2_yilin"
+    }
+  },
+  "payload": {
+    "text": {
+      "encoding": "utf8",
+      "compress": "raw",
+      "format": "plain",
+      "text": "562W55Wl5qih5byP5Li76KaB55qE5L2c55So6L+Y5piv6Kej6ICm562W55Wl55qE5a6a5LmJ44CB5Yib5bu65ZKM5L2/55So77yM5o6n5Yi25Luj56CB55qE5aSN5p2C5bqm77yM6K6p5q+P5Liq6YOo5YiG6YO95LiN6Iez5LqO6L+H5LqO5aSN5p2C44CB5Luj56CB6YeP6L+H5aSa44CC6Zmk5q2k5LmL5aSW77yM5a+55LqO5aSN5p2C5Luj56CB5p2l6K+077yM562W55Wl5qih5byP6L+Y6IO96K6p5YW25ruh6Laz5byA6Zet5Y6f5YiZ77yM5re75Yqg5paw562W55Wl55qE5pe25YCZ77yM5pyA5bCP5YyW44CB6ZuG5Lit5YyW5Luj56CB5pS55Yqo77yM5YeP5bCR5byV5YWlYnVn55qE6aOO6Zmp44CC"
+    },
+    "ctrl_w": {
+      "encoding": "utf8",
+      "compress": "raw",
+      "format": "json",
+      "text":"eyJhdmF0YXIiOlt7InR5cGUiOiJhY3Rpb24iLCJ2YWx1ZSI6ImExXzRfMl9MIiwid2IiOjMsIndlIjo1fV19"
+    }
+  }
+}

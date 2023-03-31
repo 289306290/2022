@@ -10,5 +10,8 @@ public class BinaryCode {
         System.out.println("131的二进制:"+Integer.toBinaryString(131));
         System.out.println(Integer.valueOf("10000011",2));
         System.out.println(Integer.valueOf("10000001",2));
+
+        int front = 0;
+        System.out.println(front++); // 0
     }
 }

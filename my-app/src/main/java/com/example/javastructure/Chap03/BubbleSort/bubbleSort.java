@@ -32,7 +32,7 @@ class ArrayBub
       {
       int out, in;
 
-      for(out=nElems-1; out>1; out--)   // outer loop (backward)
+      for(out=nElems-1; out>0; out--)   // outer loop (backward)
          for(in=0; in<out; in++)        // inner loop (forward)
             if( a[in] > a[in+1] )       // out of order?
                swap(in, in+1);          // swap them
@@ -55,8 +55,9 @@ class BubbleSortApp
       ArrayBub arr;                 // reference to array
       arr = new ArrayBub(maxSize);  // create the array
 
-      arr.insert(77);               // insert 10 items
-      arr.insert(99);
+      arr.insert(99);// insert 10 items
+      arr.insert(77);
+
       arr.insert(44);
       arr.insert(55);
       arr.insert(22);

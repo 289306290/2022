@@ -3,6 +3,10 @@ package com.example.javastructure.Chap04.Brackets;// brackets.java
 // to run this program: C>java bracketsApp
 import java.io.*;                 // for I/O
 ////////////////////////////////////////////////////////////////
+
+/**
+ * 检查括号是否成对出现
+ */
 class StackX
    {
    private int maxSize;

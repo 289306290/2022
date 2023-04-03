@@ -3,6 +3,10 @@ package com.example.javastructure.Chap04.Postfix;// postfix.java
 // to run this program: C>java PostfixApp
 import java.io.*;              // for I/O
 ////////////////////////////////////////////////////////////////
+
+/**
+ * 计算后缀表达式的值
+ */
 class StackX
    {
    private int maxSize;

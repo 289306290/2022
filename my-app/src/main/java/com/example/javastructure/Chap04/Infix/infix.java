@@ -3,6 +3,10 @@ package com.example.javastructure.Chap04.Infix;// infix.java
 // to run this program: C>java InfixApp
 import java.io.*;            // for I/O
 ////////////////////////////////////////////////////////////////
+
+/**
+ * 中缀表达式转后缀表达式
+ */
 class StackX
    {
    private int maxSize;

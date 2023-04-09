@@ -1,4 +1,4 @@
-// anagram.java
+package com.example.javastructure.Chap06.anagram;// anagram.java
 // creates anagrams
 // to run this program: C>java AnagramApp
 import java.io.*;

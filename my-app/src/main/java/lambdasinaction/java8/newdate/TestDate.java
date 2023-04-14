@@ -1,7 +1,5 @@
 package lambdasinaction.java8.newdate;
 
-import net.sf.cglib.core.Local;
-
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
@@ -23,7 +21,7 @@ import static java.time.temporal.TemporalAdjusters.*;
      *  Duration.between(start,end).toMillis();
  *
  */
-public class Test {
+public class TestDate {
 
     public static void main(String[] args) {
 //        testLocalDate();

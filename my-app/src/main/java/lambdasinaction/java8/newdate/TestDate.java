@@ -25,8 +25,8 @@ public class TestDate {
 
     public static void main(String[] args) {
 //        testLocalDate();
-        testLocalDateTime();
-//        testInstant();
+//        testLocalDateTime();
+        testInstant();
 //        testTemporalAdjuster();
 //        testDateTimeFormatter();
     }
@@ -101,10 +101,15 @@ public class TestDate {
         System.out.println(date1.plus(tenDays));;
 
         Duration threeMinutes = Duration.ofMinutes(3);
+
         Duration threeMinutess = Duration.of(3, ChronoUnit.MINUTES);
         Period tenDayss = Period.ofDays(10);
+        System.out.println(LocalDate.now().plus(tenDayss));
         Period threeWeeks = Period.ofWeeks(3);
+        System.out.println(LocalDate.now().plus(threeWeeks));
+
         Period twoYearsSixMonthOneDay = Period.of(2, 6, 1);
+        System.out.println(LocalDate.now().plus(twoYearsSixMonthOneDay));
     }
 
     public static void testTemporalAdjuster() {

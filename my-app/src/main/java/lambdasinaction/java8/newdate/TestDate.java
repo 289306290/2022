@@ -6,6 +6,7 @@ import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
+import java.util.concurrent.TimeUnit;
 
 import static java.time.temporal.TemporalAdjusters.*;
 
@@ -23,12 +24,13 @@ import static java.time.temporal.TemporalAdjusters.*;
  */
 public class TestDate {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 //        testLocalDate();
 //        testLocalDateTime();
-        testInstant();
+//        testInstant();
 //        testTemporalAdjuster();
 //        testDateTimeFormatter();
+        testUseTime();
     }
 
     public static void testLocalDate() {
@@ -152,6 +154,14 @@ public class TestDate {
 
         LocalDate origin = LocalDate.parse(dateStr, formatter);
         System.out.println(origin.toString());
+    }
+
+    public static void testUseTime() throws InterruptedException {
+        Instant begin = Instant.now();
+        // do something
+        TimeUnit.SECONDS.sleep(3);
+        Instant end = Instant.now();
+        System.out.println(Duration.between(begin,end).toMillis());
     }
 
 

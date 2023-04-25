@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Computer {
+    @JsonView(DetailView.class)
     private long id;
     private String name;
     private Date createDate;

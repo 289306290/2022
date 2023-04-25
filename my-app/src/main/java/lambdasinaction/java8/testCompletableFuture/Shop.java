@@ -11,7 +11,9 @@ public class Shop {
     }
 
     public static double calculatePrice(String product) {
+        System.out.println("开始执行计算方法");
         delay();
+        System.out.println("计算方法延迟结束");
         return new Random().nextDouble() * product.charAt(0) + product.charAt(1);
     }
 
@@ -23,7 +25,7 @@ public class Shop {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
         CompletableFuture<Double> completableFuture = new CompletableFuture<>();
         double price = calculatePrice("productName");
         completableFuture.complete(price); //
@@ -40,7 +42,8 @@ public class Shop {
 
         //-----------
 
-        CompletableFuture.supplyAsync(() -> calculatePrice("produceName"));//这个和上面是等价的,同时有异常也会捕获到
+        double result = CompletableFuture.supplyAsync(() -> calculatePrice("produceName")).get();//这个和上面是等价的,同时有异常也会捕获到
+        System.out.println("result-->"+result);
 
     }
 }

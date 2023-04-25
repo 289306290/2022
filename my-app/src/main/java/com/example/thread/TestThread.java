@@ -10,9 +10,9 @@ public class TestThread {
 
     public static void main(String[] args) {
 //        TestThread.imp1();
-//        TestThread.imp2();
+        TestThread.imp2();
 //        TestThread.imp3();
-        unpark();
+//        unpark();
     }
 
     /** synchronized   wait notify

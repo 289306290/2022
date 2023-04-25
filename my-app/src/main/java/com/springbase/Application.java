@@ -25,13 +25,12 @@ public class Application {
         System.out.println("animal的名字是屬性注入的另一種方式实现的" + animal.getName());
 
 
-
         configApplicationContext.publishEvent(new ApplicationEvent("我发布事情") {
             @Override
             public Object getSource() {
                 return super.getSource();
             }
         });
-        configApplicationContext.close();
+//        configApplicationContext.close();
     }
 }
